@@ -18,6 +18,8 @@
     "url": "https://github.com/dashakiri/goit-js-hw-12/issues"
   },
   "dependencies": {
+    "lodash.debounce": "^4.0.8",
+    "notiflix": "^3.0.1",
     "parcel-bundler": "^1.12.5",
     "parcel-plugin-handlebars-precompile-ts": "^1.0.0",
     "parcel-plugin-nuke-dist": "^1.0.1",
