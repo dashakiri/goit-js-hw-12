@@ -26,5 +26,8 @@
     "posthtml-include": "^1.7.1",
     "sass": "^1.35.2",
     "sweetalert2": "^11.0.18"
+  },
+  "devDependencies": {
+    "typescript": "^4.3.5"
   }
 }
