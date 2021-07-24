@@ -1,3 +1,4 @@
+import '../css/card-list.css';
 import Notiflix from 'notiflix';
 import countryInfoCardTpl from '../templates/countryInfoCard.hbs';
 import countryList from '../templates/countryList.hbs';
@@ -5,8 +6,8 @@ import countryList from '../templates/countryList.hbs';
 const ulRef = document.querySelector('.country-list');
 const divRef = document.querySelector('.country-info');
 
-export default function fetchCountries(country) {
-    return fetch(`https://restcountries.eu/rest/v2/name/${country}?fields=name;capital;population;flag;languages`)
+export default function fetchCountries(name) {
+    return fetch(`https://restcountries.eu/rest/v2/name/${name}?fields=name;capital;population;flag;languages`)
         .then(response => {
             if (!response.ok) {
                 Notiflix.Notify.failure('Oops, there is no country with that name');
@@ -20,6 +21,7 @@ export default function fetchCountries(country) {
         })
 };
 
+// рендерит карточки с инфо о стране по условию 
 
 function countryRender(country) {
     if (country.length === 1) {
@@ -32,6 +34,8 @@ function countryRender(country) {
         Notiflix.Notify.info('Too many matches found. Please enter a more specific name.');
     };
 };
+
+// очищает список или блок при новом поиске
 
 function clearMarkup() {
     divRef.innerHTML = '';

@@ -1,0 +1,15 @@
+.list-item:not(:first-child) {
+  margin-top: 10px;
+}
+
+.country-heading {
+  display: inline-flex;
+}
+
+.country-name {
+  margin: 0 10px;
+}
+
+.flag-img {
+  display: inline-flex;
+}
