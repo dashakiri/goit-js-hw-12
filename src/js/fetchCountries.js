@@ -1,6 +1,5 @@
 import { Notify } from 'notiflix';
 import countryInfoCardTpl from '../templates/countryInfoCard.hbs';
-
 import countryList from '../templates/countryList.hbs';
 
 const ulRef = document.querySelector('.country-list');
@@ -10,11 +9,13 @@ export default function fetchCountries(country) {
     return fetch(`https://restcountries.eu/rest/v2/name/${country}?fields=name;capital;population;flag;languages`)
         .then(response => {
             if (!response.ok) {
-                throw new error(response.status);
+                Notify.Failure('Oops, there is no country with that name');
+                throw new error(response.status);                
             };
            return response.json();
         })
         .then(data => {
+            clearMarkup();
             console.log(data);
             countryRender(data)
         })
@@ -22,17 +23,15 @@ export default function fetchCountries(country) {
 
 
 function countryRender(country) {
-
     if (country.length === 1) {
         divRef.innerHTML = countryInfoCardTpl(country);
-    } else if (country.length > 1 && country.length <= 10) {
-        clearMarkup();
+    };
+    if (country.length > 1 && country.length <= 10) {
         ulRef.innerHTML = countryList(country);
-    } else if (country.length > 10) {
-        Notiflix.Notify.Info("Too many matches found. Please enter a more specific name.");
-    } else {
-        Notiflix.Notify.Failure("Oops, there is no country with that name");
-    }
+    };
+    if (country.length > 10) {
+        Notify.Info('Too many matches found. Please enter a more specific name.');
+    };
 };
 
 function clearMarkup() {
