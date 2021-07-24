@@ -1,4 +1,4 @@
-import { Notify } from 'notiflix';
+import Notiflix from 'notiflix';
 import countryInfoCardTpl from '../templates/countryInfoCard.hbs';
 import countryList from '../templates/countryList.hbs';
 
@@ -9,14 +9,13 @@ export default function fetchCountries(country) {
     return fetch(`https://restcountries.eu/rest/v2/name/${country}?fields=name;capital;population;flag;languages`)
         .then(response => {
             if (!response.ok) {
-                Notify.Failure('Oops, there is no country with that name');
+                Notiflix.Notify.failure('Oops, there is no country with that name');
                 throw new error(response.status);                
             };
            return response.json();
         })
         .then(data => {
             clearMarkup();
-            console.log(data);
             countryRender(data)
         })
 };
@@ -30,7 +29,7 @@ function countryRender(country) {
         ulRef.innerHTML = countryList(country);
     };
     if (country.length > 10) {
-        Notify.Info('Too many matches found. Please enter a more specific name.');
+        Notiflix.Notify.info('Too many matches found. Please enter a more specific name.');
     };
 };
 
